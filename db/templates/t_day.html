@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+	<style type="text/css">
+		*{margin:0;padding:0;background-repeat: no-repeat; background-attachment:fixed; background-size: cover; -webkit-background-size: cover;color:#FFF;}
+		.main{width:1080px;height:1920px;border:1px solid #000;background:url(images/t_bg.jpg)}
+		input{color:#000}
+		#RadioGroup1_1{margin-left:30%;}
+		.welcome{position:absolute;margin-top:30%;margin-left:10%}
+		.w_double{width:100px;height:100px;border:1px red solid;}
+		.table{positon:relative;margin-left:15%;margin-top:50%;}
+		.update{position:absolute;margin-top:5%;;margin-left:20%;}
+		.double{background:#FFF;;width:15%}
+		
+		
+	</style>
+
+<body>
+<div class="main">
+	<div id="top">
+	  <div align="right"><a href="mechanic.html"><img src="images/backUI.png"></a><a href="#"><img src="images/goUI.png"></a><a href="main.html"><img src="images/mainUI.png"></a></div>
+  </div>
+	<div class="welcome">
+		<div class="w_title"><h2>欢迎您 三班驾驶员：张XX<br/ >车辆WJ3562检修完成 请填写数据后提交</h2></div>
+	</div>
+	<div class="table">
+        <table width="90%" border="0">
+          <tr>
+            <td colspan="5" align="center"><h1>车辆检查保养(日保养)</h1></td>
+          </tr>
+          <tr>
+            <td width="5%">序号</td>
+            <td width="30%">检查项目</td>
+            <td width="20%" height="10" align="center">检查结果</td>
+            <td width="10%">备注</td>
+          </tr>
+          <tr>
+            <td width="5%">1</td>
+            <td width="30%">行车记录仪</td>
+            <td width="20%">
+              <form id="form1" name="form1" method="post" action="">
+                <label>
+                  <input name="RadioGroup1" type="radio" id="RadioGroup1_0" checked="checked" />正常
+                </label>
+                <label>
+                  <input type="radio" name="RadioGroup1" id="RadioGroup1_1" /> 异常
+                </label>
+              </form>
+            </td>
+            <td width="10%"><input name="put" type="text" size="15%" /></td>
+            <td rowspan="12" class="double">1</td>
+          </tr>
+          <tr>
+            <td width="5%">2</td>
+            <td width="30%">发动机</td>
+            <td width="20%">
+              <form id="form1" name="form1" method="post" action="">
+                <label>
+                  <input name="RadioGroup1" type="radio" id="RadioGroup1_0" checked="checked" />正常
+                </label>
+                <label>
+                  <input type="radio" name="RadioGroup1" id="RadioGroup1_1" /> 异常
+                </label>
+              </form>    
+            </td>
+            <td width="10%"><input name="put" type="text" size="15%" /></td>
+          </tr>
+          <tr>
+            <td width="5%">3</td>
+            <td width="30%">电气设备、灯光、喇叭、雨刮雨刷</td>
+            <td width="20%">
+              <form id="form1" name="form1" method="post" action="">
+                <label>
+                  <input name="RadioGroup1" type="radio" id="RadioGroup1_0" checked="checked" />正常
+                </label>
+                <label>
+                  <input type="radio" name="RadioGroup1" id="RadioGroup1_1" /> 异常
+                </label>
+              </form>
+            </td>
+            <td width="10%"><input name="put" type="text" size="15%" /></td>
+          </tr>
+          <tr>
+            <td width="5%">4</td>
+            <td width="30%">各仪表工作状态、工作指示、照明</td>
+            <td width="20%">
+              <form id="form1" name="form1" method="post" action="">
+                <label>
+                  <input name="RadioGroup1" type="radio" id="RadioGroup1_0" checked="checked" />正常
+                </label>
+                <label>
+                  <input type="radio" name="RadioGroup1" id="RadioGroup1_1" /> 异常
+                </label>
+              </form>
+            </td>
+            <td width="10%"><input name="put" type="text" size="15%" /></td>
+          </tr>
+          <tr>
+            <td width="5%">5</td>
+            <td width="30%">转向系统、制动器</td>
+            <td width="20%">
+              <form id="form1" name="form1" method="post" action="">
+                <label>
+                  <input name="RadioGroup1" type="radio" id="RadioGroup1_0" checked="checked" />正常
+                </label>
+                <label>
+                  <input type="radio" name="RadioGroup1" id="RadioGroup1_1" /> 异常
+                </label>
+              </form>
+            </td>
+            <td width="10%"><input name="put" type="text" size="15%" /></td>
+          </tr>
+          <tr>
+            <td width="5%">6</td>
+            <td width="30%">燃油存量</td>
+            <td width="20%">
+              <form id="form1" name="form1" method="post" action="">
+                <label>
+                  <input name="RadioGroup1" type="radio" id="RadioGroup1_0" checked="checked" />正常
+                </label>
+                <label>
+                  <input type="radio" name="RadioGroup1" id="RadioGroup1_1" /> 异常
+                </label>
+              </form>
+            </td>
+            <td width="10%"><input name="put" type="text" size="15%" /></td>
+          </tr>
+          <tr>
+            <td width="5%">7</td>
+            <td width="30%">油液、水、电和灭火器是否充足</td>
+            <td width="20%">
+              <form id="form1" name="form1" method="post" action="">
+                <label>
+                  <input name="RadioGroup1" type="radio" id="RadioGroup1_0" checked="checked" />正常
+                </label>
+                <label>
+                  <input type="radio" name="RadioGroup1" id="RadioGroup1_1" /> 异常
+                </label>
+              </form>
+            </td>
+            <td width="10%"><input name="put" type="text" size="15%" /></td>
+          </tr>
+          <tr>
+            <td width="5%">8</td>
+            <td width="30%">轮胎</td>
+            <td width="20%">
+              <form id="form1" name="form1" method="post" action="">
+                <label>
+                  <input name="RadioGroup1" type="radio" id="RadioGroup1_0" checked="checked" />正常
+                </label>
+                <label>
+                  <input type="radio" name="RadioGroup1" id="RadioGroup1_1" /> 异常
+                </label>
+              </form>
+            </td>
+            <td width="10%"><input name="put" type="text" size="15%" /></td>
+          </tr>
+          <tr>
+            <td width="5%">9</td>
+            <td width="30%">水泵系统</td>
+            <td width="20%">
+              <form id="form1" name="form1" method="post" action="">
+                <label>
+                  <input name="RadioGroup1" type="radio" id="RadioGroup1_0" checked="checked" />正常
+                </label>
+                <label>
+                  <input type="radio" name="RadioGroup1" id="RadioGroup1_1" /> 异常
+                </label>
+              </form>
+            </td>
+            <td width="10%"><input name="put" type="text" size="15%" /></td>
+          </tr>
+          <tr>
+            <td width="5%">10</td>
+            <td width="30%">车容</td>
+            <td width="20%">
+              <form id="form1" name="form1" method="post" action="">
+                <label>
+                  <input name="RadioGroup1" type="radio" id="RadioGroup1_0" checked="checked" />正常
+                </label>
+                <label>
+                  <input type="radio" name="RadioGroup1" id="RadioGroup1_1" /> 异常
+                </label>
+              </form>
+            </td>
+            <td width="10%"><input name="put" type="text" size="15%" /></td>
+          </tr>
+          <tr>
+            <td width="5%">11</td>
+            <td width="30%">器材门安全锁装置、室内消防物有无紧固</td>
+            <td width="20%">
+              <form id="form1" name="form1" method="post" action="">
+                <label>
+                  <input name="RadioGroup1" type="radio" id="RadioGroup1_0" checked="checked" />正常
+                </label>
+                <label>
+                  <input type="radio" name="RadioGroup1" id="RadioGroup1_1" /> 异常
+                </label>
+              </form>
+            </td>
+            <td width="10%"><input name="put" type="text" size="15%" /></td>
+          </tr>
+          <tr>
+            <td width="5%">12</td>
+            <td width="30%">车顶消防物有无松脱紧固</td>
+            <td width="20%">
+              <form id="form1" name="form1" method="post" action="">
+                <label>
+                  <input name="RadioGroup1" type="radio" id="RadioGroup1_0" checked="checked" />正常
+                </label>
+                <label>
+                  <input type="radio" name="RadioGroup1" id="RadioGroup1_1" /> 异常
+                </label>
+              </form>
+            </td>
+            <td width="10%"><input name="put" type="text" size="15%" /></td>
+          </tr>
+    </table>
+	<div class="update"><a href="success.html"><img src="images/uppdate.png" /></a></div>
+  </div>
+    
+</div>
+</body>
+</html>
