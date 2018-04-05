@@ -40,6 +40,13 @@ margin-right:2%;}
 	word-break: break-all;
 	word-wrap: break-word;
 }
+.STYLE6 {
+	font-size: 22px;
+	color: #FFFFFF;
+	font-family: "宋体";
+	letter-spacing: 0.2em;
+	background:url(/static/images/1.png);
+}
 </style>
 </head>
 
@@ -77,7 +84,9 @@ margin-right:2%;}
 			</div>
 			<div>
 				{% for it in checked_car %}
-				<p>{{it}}<p>
+				<form action="/viewcar" method="post">
+					<p><button  class="STYLE6" name="plate_num" type="submit" value="{{it}}"><strong>{{it}}</strong></button></p>
+				</form>
 				{% endfor %}
 			</div>
 		</div>

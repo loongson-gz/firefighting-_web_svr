@@ -1,19 +1,22 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from flask import Flask, request, render_template
-from db.MysqlTool import app
 #from flask_sqlalchemy import SQLAlchemy
 import datetime
 import time
+
+from flask import Flask, render_template, request
+
 import dbhepler
 import readserial
+from db.MysqlTool import app
 
 finger_id = 0
 car_id = 0
 plate = ""
 #app = Flask(__name__) 
 
+##获取车辆数据
 def get_plate_data():
     L = dbhepler.get_task()
     not_check_ = []
@@ -31,6 +34,7 @@ def get_plate_data():
             checked_.append(t[0])
     return not_check_, checked_, not_mechanic_, mechanic_
 
+#根据指纹跳转 
 @app.route('/', methods=['GET', 'POST'])
 def home():
     global finger_id
@@ -45,7 +49,7 @@ def home():
         return render_template('gosignin.html')         
         #return render_template('home_jump.html', not_check_car=not_check_, checked_car=checked_, not_mechanic_car=not_mechanic_, mechaniced_car=mechanic_)
 
-##进入登录页         
+##进入登录页        
 @app.route('/signin', methods=['GET'])
 def signin_form():
     #finger_id = readserial.get_finger_id()
@@ -82,7 +86,7 @@ def signin_form():
                         
         #return render_template('error.html')
 
-#提交        
+#提交检查结果        
 @app.route('/signin', methods=['POST'])
 def signin():
     print("***********qr_code***************")    
@@ -168,14 +172,14 @@ def commit():
 def mechanic_tech():
     return render_template("t_fixed.html")
 
-
+##提交成功
 @app.route('/success', methods=['GET'])
 def go_sucess():
     finger_id = 0
     dbhepler.update_finger_id(0)
     return render_template("success.html")
 
-
+##回到主页
 @app.route('/gohome', methods=['GET'])
 def go_home():
     global finger_id
@@ -185,8 +189,8 @@ def go_home():
 
 ## 领导或技师检查车辆
 @app.route('/gotocar', methods=['POST'])
-def go_to_car():
-    print("gotocar ....")
+def goto_check_car():
+    print("goto check car ....")
     global plate
     plate = request.form['plate_num']
     print("plate:",plate)
@@ -209,6 +213,24 @@ def go_to_car():
     w, items = dbhepler.get_compent_by_car_id(car_id)
     return render_template('driver.html', department=department_, name=name_, car=plate, t=w, year=y,month=m,day=d, items=items, level=level)
 
+## 查看已检查车辆
+@app.route('/viewcar', methods=['POST'])
+def goto_view_car():
+    print("viewcar ....")
+    global plate
+    plate = request.form['plate_num']
+    print("plate:",plate)
+    today=datetime.date.today()
+    y = today.year
+    m = today.month
+    d = today.day
+    car_ = dbhepler.get_car_id_by_plate(plate)
+    w, items = dbhepler.get_compent_by_car_id(car_.id)
+    return render_template('view_car.html',  car=plate, t=w, year=y,month=m,day=d, items=items)
+
+
 if __name__ == '__main__':
-    readserial.start_get_finger()
+    #重启后重置为无人使用状态
+    dbhepler.update_finger_id(0)
+    #readserial.start_get_finger()
     app.run()
