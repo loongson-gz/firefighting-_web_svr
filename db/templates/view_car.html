@@ -37,7 +37,6 @@
           <tr>
             <td width="5%">序号</td>
             <td width="30%">检查项目</td>
-            <td width="20%" height="10" align="center">检查结果</td>
             <td width="10%">备注</td>
           </tr>
 		  
@@ -49,25 +48,7 @@
 			{% else %}
 			<td width="30%" ><span style="color:green">{{it[1]}}</span></td>
 			{% endif %}
-            <td width="20%">
-              <form id="form1" name="form1" method="post" action="">
-                <label>
-				{% if it[3] == 1 %}
-                  <input name="RadioGroup1" type="radio" id="RadioGroup1_0" checked="checked" />正常
-				{% else %}
-					<input name="RadioGroup1" type="radio" id="RadioGroup1_0"  />正常
-				{% endif %}
-                </label>
-                <label>
-				{% if it[3] == 1 %}
-                  <input name="RadioGroup1" type="radio" id="RadioGroup1_0"  />异常
-				{% else %}
-					<input name="RadioGroup1" type="radio" id="RadioGroup1_0" checked="checked" />异常
-				{% endif %}                
-                </label>
-              </form>
-            </td>
-            <td width="10%"><input name="put" type="text" size="15%" /></td>
+            <td width="10%"><input name="put" type="text" size="15%" value="{{it[4]}}"/></td>
           </tr>
 		  {% endfor %}
     </table>

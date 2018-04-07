@@ -135,6 +135,20 @@ def update_record(member_id, car_id, compent_id):
     sql=tmp.format(mem_id=member_id, now=dt_now, time=tm_now, car_id=car_id, compent_id=compent_id, dt=dt)
     print(sql)
     db.session.execute(sql)
+
+def update_record_desc(car_id, compent_id, desc):
+    dt=datetime.date.today()
+    print(dt)
+    #r = Record.query.filter_by(car_id=car_id, compent_id=compent_id, date_time=dt_now).first()
+    #r.member_id = member_id
+    #r.date_time = dt_now
+    #r.check_status = 1
+    #db.session.add(r)
+    #db.session.commit()
+    tmp="update t_record set `desc`='{desc}' WHERE car_id={car_id} and compent_id={compent_id} and date='{dt}'"
+    sql=tmp.format(desc=desc, car_id=car_id, compent_id=compent_id, dt=dt)
+    print(sql)
+    db.session.execute(sql)
 #############################################################################
 
 def get_role(id):
@@ -180,6 +194,10 @@ def get_finger_id():
 def get_compent_by_qr_code(qr):
    L= CarCompent.query.filter_by(qr_code=qr)
    return L
+
+def get_compent_id_by_name(name):
+    L= CarCompent.query.filter_by(name=name).first()
+    return L
 
 def get_compent_info_by_car_id(id):
     c=CarCompent.query.filter_by(car_id=id)
@@ -278,7 +296,7 @@ def get_compent_by_car_id(id):
     i = 1
     for r in L: 
         compent = get_compent_by_id(r.compent_id)
-        tmp = [i, compent.name, r.check_status, r.compent_status]
+        tmp = [i, compent.name, r.check_status, r.compent_status, r.desc]
         i = i+1
         ret.append(tmp)
     return t, ret

@@ -110,6 +110,20 @@ def signin():
     name_ = L[1]
     department_ = L[2]   
 
+    print(request.values)
+    table_cxt_ = request.form['table_cxt']
+    print(table_cxt_)
+    print("********************")        
+    rows = table_cxt_.split("#")
+    for l in rows:
+        if len(l) > 0:
+            cols = l.split(',')
+            print(cols) 
+            desc = cols[3].strip()           
+            if desc :
+                compent = dbhepler.get_compent_id_by_name(cols[1].strip())
+                dbhepler.update_record_desc(car_id, compent.id, desc)
+                
     for qr in qr_L:   
         print("compent_qr_code--->",qr)
         compent = dbhepler.get_compent_by_qr_code(qr)
