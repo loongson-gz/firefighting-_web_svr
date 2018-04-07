@@ -109,6 +109,14 @@ def signin():
     level = L[-1]
     name_ = L[1]
     department_ = L[2]   
+
+    for qr in qr_L:   
+        print("compent_qr_code--->",qr)
+        compent = dbhepler.get_compent_by_qr_code(qr)
+        for c in compent:
+            print(L[0], car_id, c.id)
+            dbhepler.update_record(L[0], car_id, c.id)
+
     compent_lst = []
     if level == 1:
         compent_lst = dbhepler.get_compent_lst_by_plate(L[4])
@@ -117,20 +125,12 @@ def signin():
     
     compent_set = set(compent_lst)
     compent_l = list(compent_set)
-    if len(compent_l) != len(qr_L):
-         bFinished = 0
+    qr_L.sort()
+    compent_l.sort()
+    if len(compent_l) > 0 :
+        bFinished = 0
     else :
-        qr_L.sort()
-        compent_l.sort()
-        if qr_L == compent_l:
-            bFinished = 1
-    
-    for qr in qr_L:   
-        print("compent_qr_code--->",qr)
-        compent = dbhepler.get_compent_by_qr_code(qr)
-        for c in compent:
-            print(L[0], car_id, c.id)
-            dbhepler.update_record(L[0], car_id, c.id)
+        bFinished = 1
             
     if bFinished == 1:
         print("finished .....")
@@ -144,7 +144,11 @@ def signin():
             not_check_, checked_, not_mechanic_, mechanic_ = get_plate_data()
             return render_template('mechanic.html', not_check=not_check_)
         elif level == 3:
-            go_home()       
+            not_check_, checked_, not_mechanic_, mechanic_ = get_plate_data()
+            return render_template('leader.html', not_check=not_check_)
+        else :
+            dbhepler.update_finger_id(0)
+            return render_template("gohome.html")      
     else :
         print("unfinished .....")        
         today=datetime.date.today()

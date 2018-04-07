@@ -61,24 +61,17 @@ margin-right:2%;}
 		<div id="blank2"></div>
 		<div id="a">
 			<img src="/static/images/main1.png" width="221" height="37">
-			<img src="/static/images/main2.png" width="223" height="37">
-			<img src="/static/images/main3.png" width="222" height="37">
 			<img src="/static/images/main4.png" width="185" height="37">
 		</div>
 		<div id="b">
-			<div>
-				{% for it in not_check_car %}
-				<p>{{it}}<p>
-				{% endfor %}
-			</div>
+			
 			<div>
 				{% for it in not_mechanic_car %}
 				<p>{{it}}<p>
 				{% endfor %}
 			</div>
-
 			<div>
-				{% for it in mechaniced_car %}
+				{% for it in not_check_car %}
 				<p>{{it}}<p>
 				{% endfor %}
 			</div>
@@ -87,6 +80,11 @@ margin-right:2%;}
 				<form action="/viewcar" method="post">
 					<p><button  class="STYLE6" name="plate_num" type="submit" value="{{it}}"><strong>{{it}}</strong></button></p>
 				</form>
+				{% endfor %}
+			</div>
+			<div>
+				{% for it in mechaniced_car %}
+				<p>{{it}}<p>
 				{% endfor %}
 			</div>
 		</div>
