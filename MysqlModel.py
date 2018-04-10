@@ -82,8 +82,11 @@ class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     car_id = db.Column(db.Integer)
     date = db.Column(db.Date)
-    # 0:未检， 1:已检 2:技师已审核 3:领导已审核
+    # 0:未检 1:已检 2:技师已审核 3:领导已审核
     status = db.Column(db.SmallInteger, default=0)
+    # 0:正常 1:故障 2:待修     
+    result = db.Column(db.SmallInteger, default=0)
+    
 
 #日常检测项
 class Task_Normal(db.Model):

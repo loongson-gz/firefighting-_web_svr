@@ -109,8 +109,14 @@ alert("还有未检查项，请检查完之后再提交！")
           <tr>
             <td width="5%">序号</td>
             <td width="30%">检查项目</td>
-            <td width="20%" height="10" align="center">检查结果</td>
+            <td width="20%" height="10">检查结果</td>
             <td width="10%">备注</td>
+          </tr>
+		  <tr>
+            <td width="5%">0</td>
+            <td width="30%">总体车况</td>
+            <td width="20%" >0:正常 1:故障 2:待修</td>
+            <td width="10%"><input name="put" type="text" size="15%" value="0"/></td>
           </tr>
 		  
 		  {% for it in items %}

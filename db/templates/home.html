@@ -20,7 +20,7 @@
 #bottom img{margin:0 2%;}
 
 .div1 #bottom table tr td {
-	font-size: 36px;
+	font-size: 48px;
 	color: #FFF;
 }
 .div1 #a {
@@ -40,13 +40,35 @@ margin-right:2%;}
 	word-break: break-all;
 	word-wrap: break-word;
 }
-.STYLE6 {
-	font-size: 22px;
-	color: #FFFFFF;
+.STYLE0 {
+	font-size: 18px;
+	color: #00FF00;
+	width:200px;
+	height:30px;
 	font-family: "宋体";
 	letter-spacing: 0.2em;
 	background:url(/static/images/1.png);
 }
+.STYLE1 {
+	font-size: 18px;
+	color: #FFFF00;
+	width:200px;
+	height:30px;
+	font-family: "宋体";
+	letter-spacing: 0.2em;
+	background:url(/static/images/1.png);
+}
+.STYLE2 {
+	font-size: 18px;
+	color: #FF0000;
+	width:200px;
+	height:30px;
+	font-family: "宋体";
+	letter-spacing: 0.2em;
+	background:url(/static/images/1.png);
+}
+
+
 </style>
 </head>
 
@@ -78,7 +100,13 @@ margin-right:2%;}
 			<div>
 				{% for it in checked_car %}
 				<form action="/viewcar" method="post">
-					<p><button  class="STYLE6" name="plate_num" type="submit" value="{{it}}"><strong>{{it}}</strong></button></p>
+					{% if it[1] == 0 %}
+					<p><button  class="STYLE0" name="plate_num" type="submit" value="{{it[0]}}" color="green" ><strong>{{it[0]}}[正常]</strong></button></p>
+					{% elif it[1] == 1 %}
+					<p><button  class="STYLE1" name="plate_num" type="submit" value="{{it[0]}}" color="yellow" ><strong>{{it[0]}}[故障]</strong></button></p>
+					{% else %}
+					<p><button  class="STYLE2" name="plate_num" type="submit" value="{{it[0]}}" color="red" ><strong>{{it[0]}}[待修]</strong></button></p>
+					{% endif %}
 				</form>
 				{% endfor %}
 			</div>

@@ -31,7 +31,8 @@ def get_plate_data():
         elif t[1] == 2:
             mechanic_.append(t[0])
         elif t[1] == 3:
-            checked_.append(t[0])
+            tmp = [t[0], t[2]]
+            checked_.append(tmp)
     return not_check_, checked_, not_mechanic_, mechanic_
 
 #根据指纹跳转 
@@ -115,7 +116,15 @@ def signin():
     print(table_cxt_)
     print("********************")        
     rows = table_cxt_.split("#")
-    for l in rows:
+    result = 0
+    ret = []
+    if len(rows) > 0:
+        ret = rows[1:]
+        tmp = rows[0].split(',')
+        if len(tmp) >=3 :
+            result = tmp[3].strip()
+    
+    for l in ret:
         if len(l) > 0:
             cols = l.split(',')
             print(cols) 
@@ -149,7 +158,7 @@ def signin():
     if bFinished == 1:
         print("finished .....")
         #更新task 表
-        dbhepler.update_task(car_id, 3) 
+        dbhepler.update_task(car_id, 3, int(result)) 
         if level == 1:
             finger_id = 0
             dbhepler.update_finger_id(0)
