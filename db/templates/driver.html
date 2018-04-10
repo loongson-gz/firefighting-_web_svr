@@ -79,9 +79,23 @@
 	
 </script>
 <body onload="javascript:document.all.qr_code.focus()">
-<div class="main">
+	<div class="main">
 	<form action="/signin" method="post" id="main_form"  onsubmit="return checkForm('main_form')">
 	<div class="table">
+{% if level == 1 %}
+{% if name %}
+<p style="margin-left:0in; text-align:left"><span style="font-size:18.0pt"><span style="font-family:宋体">欢迎您 {{department}} 驾驶员：{{name}}</span></span></span><span style="font-size:18.0pt"><span style="font-family:Calibri"></span></span></span>&nbsp;</p>
+{% endif %}
+{% elif level == 2 %}
+<p style="margin-left:0in; text-align:left"><span style="font-size:18.0pt"><span style="font-family:宋体">欢迎您 {{department}} 技师：{{name}}</span></span></span><span style="font-size:18.0pt"><span style="font-family:Calibri"></span></span></span>&nbsp;</p>
+{% elif level == 3 %}
+<p style="margin-left:0in; text-align:left"><span style="font-size:18.0pt"><span style="font-family:宋体">欢迎您 {{department}} 领导：{{name}}</span></span></span><span style="font-size:18.0pt"><span style="font-family:Calibri"></span></span></span>&nbsp;</p>
+{% endif%}
+
+{% if car %}
+<p style="margin-left:0in; text-align:left"><span style="font-size:18.0pt"><span style="font-family:宋体">车辆</span></span></span><span style="font-size:18.0pt"><span style="font-family:Calibri">{{car}}</span></span></span><span style="font-size:18.0pt"><span style="font-family:宋体">检修完成 请填写数据后提交</span></span></span></p>
+{% endif %}
+<p>&nbsp;</p>
         <table id="mytable" width="90%" border="0">
           <tr>
 		  {% if t == 0 %}

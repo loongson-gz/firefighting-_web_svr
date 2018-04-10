@@ -75,7 +75,7 @@ def signin_form():
     not_check_, checked_, not_mechanic_, mechanic_ = get_plate_data()
     if level == 1:
         #return render_template('driver.html')
-        return render_template('driver.html', department=department_, name=name_, car=L[4], t=w, year=y,month=m,day=d, items=items)
+        return render_template('driver.html', level=level, department=department_, name=name_, car=L[4], t=w, year=y,month=m,day=d, items=items)
     elif level == 2:
         return render_template('mechanic.html', not_check=not_check_)
     elif level == 3:
@@ -170,7 +170,7 @@ def signin():
         m = today.month
         d = today.day
         w, items = dbhepler.get_compent_by_car_id(car_id)
-        return render_template("driver_not_finished.html", department=department_, name=name_, car=L[4], t=w, year=y,month=m,day=d, items=items)
+        return render_template("driver_not_finished.html", level=level, department=department_, name=name_, car=L[4], t=w, year=y,month=m,day=d, items=items)
     
 
 @app.route('/commit', methods=['GET'])
@@ -229,7 +229,7 @@ def goto_check_car():
     global car_id
     car_id = car_.id
     w, items = dbhepler.get_compent_by_car_id(car_id)
-    return render_template('driver.html', department=department_, name=name_, car=plate, t=w, year=y,month=m,day=d, items=items, level=level)
+    return render_template('driver.html', level=level, department=department_, name=name_, car=plate, t=w, year=y,month=m,day=d, items=items)
 
 ## 查看已检查车辆
 @app.route('/viewcar', methods=['POST'])
