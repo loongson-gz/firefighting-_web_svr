@@ -78,9 +78,9 @@ def signin_form():
         #return render_template('driver.html')
         return render_template('driver.html', level=level, department=department_, name=name_, car=L[4], t=w, year=y,month=m,day=d, items=items)
     elif level == 2:
-        return render_template('mechanic.html', not_check=not_check_)
+        return render_template('mechanic.html', checked= checked_, not_check=not_check_)
     elif level == 3:
-        return render_template('leader.html', not_check=not_check_)
+        return render_template('mechanic.html', checked= checked_, not_check=not_check_)
     else :
         dbhepler.update_finger_id(0)
         return render_template("gohome.html")
@@ -165,10 +165,11 @@ def signin():
             return render_template("success.html")
         elif level == 2:
             not_check_, checked_, not_mechanic_, mechanic_ = get_plate_data()
-            return render_template('mechanic.html', not_check=not_check_)
+            return render_template('mechanic.html', checked= checked_, not_check=not_check_)
+            
         elif level == 3:
             not_check_, checked_, not_mechanic_, mechanic_ = get_plate_data()
-            return render_template('leader.html', not_check=not_check_)
+            return render_template('mechanic.html', checked= checked_, not_check=not_check_)
         else :
             dbhepler.update_finger_id(0)
             return render_template("gohome.html")      

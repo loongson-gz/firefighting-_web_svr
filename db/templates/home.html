@@ -82,8 +82,8 @@ margin-right:2%;}
 		</div>
 		<div id="blank2"></div>
 		<div id="a">
-			<img src="/static/images/main1.png" width="221" height="37">
-			<img src="/static/images/main4.png" width="185" height="37">
+			<img src="/static/images/main1.png" width="220" height="37">
+			<img src="/static/images/main4.png" width="220" height="37">
 		</div>
 		<div id="b">
 			
@@ -101,11 +101,11 @@ margin-right:2%;}
 				{% for it in checked_car %}
 				<form action="/viewcar" method="post">
 					{% if it[1] == 0 %}
-					<p><button  class="STYLE0" name="plate_num" type="submit" value="{{it[0]}}" color="green" ><strong>{{it[0]}}[正常]</strong></button></p>
+					<p><button  class="STYLE0" name="plate_num" type="submit" value="{{it[0]}}"><strong>{{it[0]}}[正常]</strong></button></p>
 					{% elif it[1] == 1 %}
-					<p><button  class="STYLE1" name="plate_num" type="submit" value="{{it[0]}}" color="yellow" ><strong>{{it[0]}}[故障]</strong></button></p>
+					<p><button  class="STYLE1" name="plate_num" type="submit" value="{{it[0]}}"><strong>{{it[0]}}[故障]</strong></button></p>
 					{% else %}
-					<p><button  class="STYLE2" name="plate_num" type="submit" value="{{it[0]}}" color="red" ><strong>{{it[0]}}[待修]</strong></button></p>
+					<p><button  class="STYLE2" name="plate_num" type="submit" value="{{it[0]}}"><strong>{{it[0]}}[待修]</strong></button></p>
 					{% endif %}
 				</form>
 				{% endfor %}
