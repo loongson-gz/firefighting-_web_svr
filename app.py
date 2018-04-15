@@ -76,7 +76,8 @@ def signin_form():
     not_check_, checked_, not_mechanic_, mechanic_ = get_plate_data()
     if level == 1:
         #return render_template('driver.html')
-        return render_template('driver.html', level=level, department=department_, name=name_, car=L[4], t=w, year=y,month=m,day=d, items=items)
+        task_ = dbhepler.get_car_state_by_car_id(car_id)            
+        return render_template('driver.html', car_state=task_.result, level=level, department=department_, name=name_, car=L[4], t=w, year=y,month=m,day=d, items=items)
     elif level == 2:
         return render_template('mechanic.html', checked= checked_, not_check=not_check_)
     elif level == 3:
@@ -121,14 +122,14 @@ def signin():
     if len(rows) > 0:
         ret = rows[1:]
         tmp = rows[0].split(',')
-        if len(tmp) >=3 :
-            result = tmp[3].strip()
+        if len(tmp) >=2 :
+            result = tmp[2].strip()
     
     for l in ret:
         if len(l) > 0:
             cols = l.split(',')
             print(cols) 
-            desc = cols[3].strip()    
+            desc = cols[2].strip()    
             dec_ = "正常"       
             if desc :
                 dec_ = desc  
@@ -182,7 +183,8 @@ def signin():
         m = today.month
         d = today.day
         w, items = dbhepler.get_compent_by_car_id(car_id)
-        return render_template("driver_not_finished.html", level=level, department=department_, name=name_, car=L[4], t=w, year=y,month=m,day=d, items=items)
+        task_ = dbhepler.get_car_state_by_car_id(car_id)                
+        return render_template("driver_not_finished.html",  car_state=task_.result, level=level, department=department_, name=name_, car=L[4], t=w, year=y,month=m,day=d, items=items)
     
 
 @app.route('/commit', methods=['GET'])
@@ -241,7 +243,8 @@ def goto_check_car():
     global car_id
     car_id = car_.id
     w, items = dbhepler.get_compent_by_car_id(car_id)
-    return render_template('driver.html', level=level, department=department_, name=name_, car=plate, t=w, year=y,month=m,day=d, items=items)
+    task_ = dbhepler.get_car_state_by_car_id(car_id)        
+    return render_template('driver.html', car_state=task_.result, level=level, department=department_, name=name_, car=plate, t=w, year=y,month=m,day=d, items=items)
 
 ## 查看已检查车辆
 @app.route('/viewcar', methods=['POST'])
@@ -263,4 +266,4 @@ if __name__ == '__main__':
     #重启后重置为无人使用状态
     dbhepler.update_finger_id(0)
     #readserial.start_get_finger()
-    app.run()
+    app.run(host="0.0.0.0", port=5000)

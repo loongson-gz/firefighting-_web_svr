@@ -203,6 +203,11 @@ def get_compent_info_by_car_id(id):
     c=CarCompent.query.filter_by(car_id=id)
     return c
 
+def get_car_state_by_car_id(id):
+    today = datetime.date.today()
+    t = Task.query.filter_by(car_id=id, date=today).first()
+    return t
+
 #############################################################################
 #获取任务类型： 0：日常， 1：周日， 2：月底
 def get_task_type():

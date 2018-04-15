@@ -39,13 +39,11 @@ alert("还有未检查项，请检查完之后再提交！")
 				/*if (j == 1){
 					continue;
 				}*/
-				if (j==2) {
-					data[i][j] = 0
-				} else if(j==3) {
-					data[i][j] = mytable.rows[i+2].cells[j].lastElementChild.value
-				} else {
-					data[i][j] = mytable.rows[i+2].cells[j].innerText;
-				}
+                if(j==(cells-1)) {
+                    data[i][j] = mytable.rows[i+2].cells[j].lastElementChild.value
+                } else {
+                    data[i][j] = mytable.rows[i+2].cells[j].innerText;
+                }
             }
         }
         return data;
@@ -106,48 +104,48 @@ alert("还有未检查项，请检查完之后再提交！")
 			<td colspan="5" align="center"><h1>车辆检查保养(月保养)</h1></td>
 			{% endif %}
           </tr>
-          <tr>
-            <td width="5%">序号</td>
-            <td width="30%">检查项目</td>
-            <td width="20%" height="10">检查结果</td>
-            <td width="10%">备注</td>
-          </tr>
-		  <tr>
-            <td width="5%">0</td>
-            <td width="30%">总体车况</td>
-            <td width="20%" >0:正常 1:故障 2:待修</td>
-            <td width="10%"><input name="put" type="text" size="15%" value="0"/></td>
-          </tr>
-		  
-		  {% for it in items %}
-          <tr>
-            <td width="5%">{{it[0]}}</td>
-			{% if it[2] == 0 %}
-            <td width="30%"> <span style="color:grey">{{it[1]}}</span> </td>
-			{% else %}
-			<td width="30%" ><span style="color:white">{{it[1]}}</span></td>
-			{% endif %}
-            <td width="20%">
-              <form id="form1" name="form1" method="post" action="">
-                <label>
-				{% if it[3] == 1 %}
-                  <input name="RadioGroup1" type="radio" id="RadioGroup1_0" checked="checked" />正常
-				{% else %}
-					<input name="RadioGroup1" type="radio" id="RadioGroup1_0"  />正常
-				{% endif %}
-                </label>
-                <label>
-				{% if it[3] == 1 %}
-                  <input name="RadioGroup1" type="radio" id="RadioGroup1_0"  />异常
-				{% else %}
-					<input name="RadioGroup1" type="radio" id="RadioGroup1_0" checked="checked" />异常
-				{% endif %}                
-                </label>
-              </form>
-            </td>
-            <td width="10%"><input name="put" type="text" size="15%" value="{{it[4]}}" /></td>
-          </tr>
-		  {% endfor %}
+            <tr>
+                <td width="5%">序号</td>
+                <td width="30%">检查项目</td>
+                <td width="10%">检查结果</td>
+            </tr>
+            <tr>
+                <td width="5%">0</td>
+                <td width="30%">总体车况</td>
+                <td width="10%">
+                    {% if car_state == 1 %}
+                    <select name="districtSelect" style="color:#000000" onchange="document.getElementById('district').value=this.options[this.selectedIndex].value">
+                        <option value="0" style="color:#000000" >正常</option>
+                        <option value="1" style="color:#000000" selected>故障</option>
+                        <option value="2" style="color:#000000" >待修</option>
+                    </select>
+                    {% elif car_state == 2 %}
+                    <select name="districtSelect" style="color:#000000" onchange="document.getElementById('district').value=this.options[this.selectedIndex].value">
+                        <option value="0" style="color:#000000" >正常</option>
+                        <option value="1" style="color:#000000" >故障</option>
+                        <option value="2" style="color:#000000" selected >待修</option>
+                    </select>
+                    {% else %}
+                    <select name="districtSelect" style="color:#000000" onchange="document.getElementById('district').value=this.options[this.selectedIndex].value">
+                        <option value="0" style="color:#000000" selected>正常</option>
+                        <option value="1" style="color:#000000" >故障</option>
+                        <option value="2" style="color:#000000" >待修</option>
+                    </select>
+                    {% endif %}
+
+                </td>
+            </tr>
+            {% for it in items %}
+            <tr>
+                <td width="5%">{{it[0]}}</td>
+                {% if it[2] == 0 %}
+                <td width="30%"> <span style="color:grey">{{it[1]}}</span> </td>
+                {% else %}
+                <td width="30%" ><span style="color:white">{{it[1]}}</span></td>
+                {% endif %}
+                <td width="10%"><input name="put" type="text" size="15%" value="{{it[4]}}"/></td>
+            </tr>
+            {% endfor %}
     </table>
 	<div id="blank"></div>
 	<div><textarea cols="63" id="qr_code"  name="qr_code_text" rows="5"  style=" font-size:24px; color:#F00" ></textarea></div>
