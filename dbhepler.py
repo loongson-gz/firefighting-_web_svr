@@ -41,7 +41,7 @@ def get_all_record():
     logging.debug("==========================get_all_Record========================")    
     L = Record.query.all()
     for r in L:
-        print(r.id, r.car_id, r.member_id, r.compent_id, r.check_status, r.compent_status, r.desc, r.date, r.time)
+        print(r.id, r.car_id, r.member_id, r.compent_id, r.check_status, r.compent_status, r.compent_desc, r.date, r.time)
     return L
 
 def get_all_record_mechanic():
@@ -63,7 +63,7 @@ def get_all_task():
     logging.debug("==========================get_all_Task========================")    
     L = Task.query.all()
     for r in L:
-        print(r.id, r.car_id, r.status, r.date)
+        print(r.id, r.car_id, r.status, r.date, r.result)
     return L
 
 def get_all_task_normal():
@@ -136,7 +136,7 @@ def update_record(member_id, car_id, compent_id):
     print(sql)
     db.session.execute(sql)
 
-def update_record_desc(car_id, compent_id, desc):
+def update_record_desc(car_id, compent_id, des):
     dt=datetime.date.today()
     print(dt)
     #r = Record.query.filter_by(car_id=car_id, compent_id=compent_id, date_time=dt_now).first()
@@ -145,8 +145,8 @@ def update_record_desc(car_id, compent_id, desc):
     #r.check_status = 1
     #db.session.add(r)
     #db.session.commit()
-    tmp="update t_record set `desc`='{desc}' WHERE car_id={car_id} and compent_id={compent_id} and date='{dt}'"
-    sql=tmp.format(desc=desc, car_id=car_id, compent_id=compent_id, dt=dt)
+    tmp="update t_record set `compent_desc`='{compent_des}' WHERE car_id={car_id} and compent_id={compent_id} and date='{dt}'"
+    sql=tmp.format(compent_des=des, car_id=car_id, compent_id=compent_id, dt=dt)
     print(sql)
     db.session.execute(sql)
 #############################################################################
@@ -167,7 +167,7 @@ def get_task_by_date(d):
     L = Task.query.filter_by(date=d)
     ret = []
     for i in L:
-        tmp =[i.car_id, i.status]
+        tmp =[i.car_id, i.status, i.result]
         ret.append(tmp)
     return ret
 
@@ -195,8 +195,8 @@ def get_compent_by_qr_code(qr):
    L= CarCompent.query.filter_by(qr_code=qr)
    return L
 
-def get_compent_id_by_name(name):
-    L= CarCompent.query.filter_by(name=name).first()
+def get_compent_id_by_name(car_id, name):
+    L= CarCompent.query.filter_by(car_id=car_id, name=name).first()
     return L
 
 def get_compent_info_by_car_id(id):
@@ -269,7 +269,7 @@ def add_task():
     db.session.commit()
 
 
-#获取当天的车辆查检测情况(粤A12345 0)
+#获取当天的车辆查检测情况(粤A12345 0, 0)
 def get_task():
     today = datetime.date.today()
     print(today)
@@ -282,8 +282,8 @@ def get_task():
     for t in taskList:
         #print(t.status)
         c = get_car_by_id(t[0])
-        print(c.plate_num, t[1], t[0])
-        r = [c.plate_num, t[1], t[0]]
+        print(c.plate_num, t[0], t[1], t[2])
+        r = [c.plate_num, t[1], t[2], t[0]]
         L.append(r)
     return L
 
@@ -296,7 +296,10 @@ def get_compent_by_car_id(id):
     i = 1
     for r in L: 
         compent = get_compent_by_id(r.compent_id)
-        tmp = [i, compent.name, r.check_status, r.compent_status, r.desc]
+        dec_ = "正常"
+        if r.compent_desc.strip() :
+            dec_ = r.compent_desc
+        tmp = [i, compent.name, r.check_status, r.compent_status, dec_]
         i = i+1
         ret.append(tmp)
     return t, ret
@@ -312,10 +315,11 @@ def get_info_by_finger_id(id):
         ret.append(r)
     return ret
 
-def update_task(car_id, status):
+def update_task(car_id, status, result):
     today=datetime.date.today()
     t = Task.query.filter_by(car_id = car_id, date=today).first()
     t.status = status
+    t.result = result
     db.session.add(t)
     db.session.commit()
 

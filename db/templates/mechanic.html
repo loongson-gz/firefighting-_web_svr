@@ -34,14 +34,46 @@ margin-right:1%;
 	font-family: "宋体";
 	letter-spacing: 0.2em;
 }
+
+.STYLE0 {
+	font-size: 18px;
+	color: #00FF00;
+	width:200px;
+	height:30px;
+	font-family: "宋体";
+	letter-spacing: 0.2em;
+	background:url(/static/images/1.png);
+}
+.STYLE1 {
+	font-size: 18px;
+	color: #FFFF00;
+	width:200px;
+	height:30px;
+	font-family: "宋体";
+	letter-spacing: 0.2em;
+	background:url(/static/images/1.png);
+}
+.STYLE2 {
+	font-size: 18px;
+	color: #FF0000;
+	width:200px;
+	height:30px;
+	font-family: "宋体";
+	letter-spacing: 0.2em;
+	background:url(/static/images/1.png);
+}
+
 .STYLE6 {
-	font-size: 36px;
+	font-size: 18px;
 	color: #FFFFFF;
+	width:200px;
+	height:30px;
 	font-family: "宋体";
 	letter-spacing: 0.2em;
 	background:url(/static/images/1.png);
 }
 #bottom{margin-bottom:25%;}
+
 </style>
 </head>
 
@@ -51,12 +83,25 @@ margin-right:1%;
     <div id="bottom">
 		<div align="center" class="STYLE5">
 			<div><img src="/static/images/mechanic1.png"></div>
-			{% for it in not_check %}
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+			{% for it in checked %}
 					<form action="/gotocar" method="post">
-					<p><button  class="STYLE6" name="plate_num" type="submit" value="{{it}}"><strong>{{it}}</strong></button></p>
+					{% if it[1] == 0 %}
+					<p><button  class="STYLE0" name="plate_num" type="submit" value="{{it[0]}}"><strong>{{it[0]}}[正常]</strong></button></p>
+					{% elif it[1] == 1 %}
+					<p><button  class="STYLE1" name="plate_num" type="submit" value="{{it[0]}}"><strong>{{it[0]}}[故障]</strong></button></p>
+					{% else %}
+					<p><button  class="STYLE2" name="plate_num" type="submit" value="{{it[0]}}"><strong>{{it[0]}}[待修]</strong></button></p>
+					{% endif %}
 					</form>
 			{% endfor %}
-			<div><img src="/static/images/mechanic2.png" name="b" id="b"></div>
+			{% for it in not_check %}
+					<form action="/gotocar" method="post">
+					<p><button  class="STYLE6" name="plate_num" type="submit" value="{{it}}"><strong>&nbsp;{{it}}&nbsp;</strong></button></p>
+					</form>
+			{% endfor %}
+			<div><name="b" id="b"></div>
 		</div>
 	</div>
     <div id="top">

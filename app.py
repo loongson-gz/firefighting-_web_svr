@@ -128,10 +128,12 @@ def signin():
         if len(l) > 0:
             cols = l.split(',')
             print(cols) 
-            desc = cols[3].strip()           
+            desc = cols[3].strip()    
+            dec_ = "正常"       
             if desc :
-                compent = dbhepler.get_compent_id_by_name(cols[1].strip())
-                dbhepler.update_record_desc(car_id, compent.id, desc)
+                dec_ = desc  
+            compent = dbhepler.get_compent_id_by_name(car_id, cols[1].strip())
+            dbhepler.update_record_desc(car_id, compent.id, dec_)
                 
     for qr in qr_L:   
         print("compent_qr_code--->",qr)

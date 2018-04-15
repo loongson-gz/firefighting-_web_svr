@@ -46,7 +46,7 @@ class Record(db.Model):
     check_status = db.Column(db.Integer,default=0)
     # 0:异常， 1:正常       
     compent_status = db.Column(db.Integer, default=1)
-    desc = db.Column(db.String(255),default="")
+    compent_desc = db.Column(db.String(255),default="")
    # date_time = db.Column(db.DateTime)
     date = db.Column(db.Date)
     time = db.Column(db.Time)
